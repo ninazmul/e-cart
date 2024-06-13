@@ -11,7 +11,7 @@ import { FaOpencart } from "react-icons/fa6";
 export default function Footers() {
   return (
     <Footer container>
-      <div className="w-full px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
+      <div className="w-full px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 border-t border-orange-500 py-10">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
           <div className="flex items-center gap-2 cursor-pointer pb-10 md:p-auto">
             <FaOpencart className="text-4xl font-bold" />
