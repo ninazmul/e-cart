@@ -7,18 +7,19 @@ import {
   BsTwitter,
 } from "react-icons/bs";
 import { FaOpencart } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 export default function Footers() {
   return (
     <Footer container>
-      <div className="w-full px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 border-t border-orange-500 py-10">
+      <div className="w-full px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 border-t border-orange-500 my-10">
         <div className="grid w-full justify-between sm:flex sm:justify-between md:flex md:grid-cols-1">
-          <div className="flex items-center gap-2 cursor-pointer pb-10 md:p-auto">
+          <Link to="/" className="flex items-center gap-2 cursor-pointer py-10">
             <FaOpencart className="text-4xl font-bold" />
             <h1 className="self-center whitespace-nowrap text-3xl font-bold font-serif dark:text-white">
               <span className="text-orange-500">E</span>-Cart
             </h1>
-          </div>
+          </Link>
           <div className="grid grid-cols-2 gap-8 sm:mt-4 sm:grid-cols-3 sm:gap-6">
             <div>
               <Footer.Title title="about" />

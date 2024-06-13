@@ -3,13 +3,39 @@ import { items } from "../../public/data";
 import Filter from "../components/Filter";
 import { Card } from "flowbite-react";
 import Header from "../components/Header";
+import "react-toastify/dist/ReactToastify.css";
+import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function Home() {
+export default function Home({ cart, setCart }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("");
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [sortOption, setSortOption] = useState("");
+
+  const addToCart = (id, price, title, description, imgSrc) => {
+    const object = {
+      id,
+      price,
+      title,
+      description,
+      imgSrc,
+    };
+    setCart([...cart, object]);
+    console.log("cart", cart);
+    toast.success("Added to Cart successfully!", {
+      position: "top-right",
+      autoClose: 1500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -72,8 +98,20 @@ export default function Home() {
   const filteredItems = applyFilters(items);
 
   return (
-    <div className="min-h-screen px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 ">
-      <Header onSearch={handleSearch} />
+    <div className="min-h-screen px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
+      <ToastContainer
+        position="top-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <Header onSearch={handleSearch} cart={cart} setCart={setCart} />
       <Filter onFilterChange={handleFilterChange} />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredItems.map((product) => (
@@ -91,7 +129,18 @@ export default function Home() {
               </p>
               <div className="flex items-center justify-between">
                 <h3 className="font-semibold">${product.price}</h3>
-                <button className="rounded-2xl border border-orange-500 text-orange-500 py-2 px-4 hover:bg-orange-500 hover:text-white font-semibold transition-all duration-300 ease-in-out">
+                <button
+                  className="rounded-2xl border border-orange-500 text-orange-500 py-2 px-4 hover:bg-orange-500 hover:text-white font-semibold transition-all duration-300 ease-in-out"
+                  onClick={() =>
+                    addToCart(
+                      product.id,
+                      product.price,
+                      product.title,
+                      product.description,
+                      product.imgSrc
+                    )
+                  }
+                >
                   Add to Cart
                 </button>
               </div>
